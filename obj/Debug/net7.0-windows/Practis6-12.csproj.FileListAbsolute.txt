@@ -55,3 +55,4 @@ D:\MyCode\Homework\Practis6-12\Practis6-12\obj\Debug\net7.0-windows\Windows\Disp
 D:\MyCode\Homework\Practis6-12\Practis6-12\obj\Debug\net7.0-windows\Windows\DriverWindow.baml
 D:\MyCode\Homework\Practis6-12\Practis6-12\obj\Debug\net7.0-windows\Windows\EmployeePersonalCardWindow.g.cs
 D:\MyCode\Homework\Practis6-12\Practis6-12\obj\Debug\net7.0-windows\Windows\EmployeePersonalCardWindow.baml
+D:\MyCode\Homework\Practis6-12\Practis6-12\obj\Debug\net7.0-windows\Practis6-12.sourcelink.json

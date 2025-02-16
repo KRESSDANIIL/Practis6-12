@@ -25,7 +25,15 @@
                     </StackPanel>
 
                     <!-- Таблица с операторами -->
-                    <DataGrid Grid.Row="1" Name="OperatorsGrid" AutoGenerateColumns="False" ItemsSource="{Binding Dispatchers}" Margin="1,1,1,1" Grid.ColumnSpan="4">
+                    <DataGrid Grid.Row="1" Name="OperatorsGrid" AutoGenerateColumns="False" 
+          ItemsSource="{Binding Dispatchers}" Margin="1,1,1,1" Grid.ColumnSpan="4"
+          IsReadOnly="True"
+          CanUserAddRows="False"
+          CanUserDeleteRows="False"
+          CanUserReorderColumns="False"
+          CanUserResizeColumns="True"
+          CanUserResizeRows="False"
+          CanUserSortColumns="False">
                         <DataGrid.Columns>
 
                             <DataGridTextColumn Header="UserId" Binding="{Binding UserId}" Width="*"/>
@@ -35,7 +43,13 @@
                             <DataGridTextColumn Header="Email" Binding="{Binding Email}" Width="*"/>
                             <DataGridTextColumn Header="Status" Binding="{Binding Status}" Width="*"/>
                             <DataGridTextColumn Header="CreatedAt" Binding="{Binding CreatedAt}" Width="*"/>
-                            <DataGridTextColumn Header="Photo" Binding="{Binding Photo}" Width="*"/>
+                            <DataGridTemplateColumn Header="Фото">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <Image Source="{Binding PhotoSource}" Width="100" Height="100"/>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
                             <DataGridTextColumn Header="Contract" Binding="{Binding EmploymentContractScan}" Width="*"/>
                             <!-- Колонка с кнопкой -->
                             <DataGridTemplateColumn Header="Раскрыть" Width="Auto">

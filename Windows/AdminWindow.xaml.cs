@@ -61,17 +61,19 @@ namespace Practis6_12.Windows
             Dispatchers.Clear();
 
             string query = @"SELECT 
-                u.user_id,
-                u.full_name,
-                u.login,
-                u.phone,
-                u.email,
-                u.status,
-                u.created_at,
-                u.photo,
-                u.employment_contract_scan
-                FROM dispatchers d
-                JOIN users u ON d.dispatcher_id = u.user_id;";
+            user_id,
+            full_name,
+            login,
+            phone,
+            email,
+            status,
+            created_at,
+            photo,
+            employment_contract_scan
+                FROM 
+                    users
+                WHERE 
+                    role = 'Dispatcher';";
 
 
             using (MySqlDataReader reader = ctx.ExecuteReader(query))
