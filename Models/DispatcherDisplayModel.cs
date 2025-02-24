@@ -39,6 +39,24 @@ namespace Practis6_12.Models
             }
 
         }
+
+        public ImageSource ContractScanSource
+        {
+            get
+            {
+                if (EmploymentContractScan == null) return null;
+                BitmapImage image = new BitmapImage();
+                using (var ms = new MemoryStream(EmploymentContractScan))
+                {
+                    image.BeginInit();
+                    image.CacheOption = BitmapCacheOption.OnLoad;
+                    image.StreamSource = ms;
+                    image.EndInit();
+                }
+                return image;
+            }
+
+        }
     }
 }
 

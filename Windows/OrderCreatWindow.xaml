@@ -1,0 +1,50 @@
+﻿<Window x:Class="Practis6_12.Windows.OrderCreatWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Practis6_12.Windows"
+        mc:Ignorable="d"
+        Title="OrderCreatWindow" Height="450" Width="800">
+    <Grid Margin="10" >
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="3*" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <Grid Grid.ColumnSpan="2" Margin="0,31,10,0" Grid.RowSpan="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="2*" />
+
+            </Grid.ColumnDefinitions>
+
+            <StackPanel Grid.Column="1" VerticalAlignment="Top" Margin="10">
+              
+
+                <Label Content="Номер клиента:"/>
+                <TextBox x:Name="Client_Phone"/>
+
+                <Label Content="Адрес начала поездки:"/>
+                <TextBox x:Name="Pickup_Location"/>
+
+                <Label Content="Адрес окончания поездки:"/>
+                <TextBox x:Name="Dropoff_Location"/>
+
+                <Label Content="Цена:"/>
+                <TextBox x:Name="Fare"/>
+
+                <Label Content="Применение дискаунтера:"/>
+                <TextBox x:Name="Discount_Applied"/>
+
+            </StackPanel>
+        </Grid>
+
+        <StackPanel Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalAlignment="Center" Margin="10">
+            <Button x:Name="Создать" Content="Создать" Width="150" Margin="5" Click="CreateOrder"/>
+        </StackPanel>
+    </Grid>
+</Window>

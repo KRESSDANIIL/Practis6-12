@@ -12,7 +12,7 @@ namespace Practis6_12.Models
 
         public int Dispatcher_id { get; set; }
 
-        public int Driver_id { get; set; }
+        public int? Driver_id { get; set; }
         public string Client_phone { get; set; }
 
         public string Pickup_location { get; set; }

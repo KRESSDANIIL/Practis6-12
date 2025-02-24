@@ -7,6 +7,165 @@
         mc:Ignorable="d"
         Title="DispatcherWindow" Height="450" Width="800">
     <Grid>
-        
+        <TabControl Grid.ColumnSpan="3">
+            
+            <TabItem Header="Водители">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="33*"/>
+                        <ColumnDefinition Width="26*"/>
+                        <ColumnDefinition Width="53*"/>
+                        <ColumnDefinition Width="632*"/>
+                        <ColumnDefinition Width="128*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+
+                    <!-- Кнопки управления -->
+                    <StackPanel Orientation="Horizontal" Margin="5,5,5,5" Grid.ColumnSpan="5">
+                        <Button Content="Обновить" Width="100" Margin="5" Click="Button_Click_Drivers" />
+                    </StackPanel>
+
+                    <!-- Таблица с водителями -->
+                    <DataGrid Grid.Row="1" Name="DriversGrid" AutoGenerateColumns="False" ItemsSource="{Binding Drivers}"  Margin="1,1,1,1" Grid.ColumnSpan="5"
+  IsReadOnly="True"
+  CanUserAddRows="False"
+  CanUserDeleteRows="False"
+  CanUserReorderColumns="False"
+  CanUserResizeColumns="True"
+  CanUserResizeRows="False"
+  CanUserSortColumns="False">
+                        <DataGrid.Columns>
+
+                            <DataGridTextColumn Header="Driver_Id" Binding="{Binding UserId}" Width="*"/>
+                            <DataGridTextColumn Header="FIO" Binding="{Binding FullName}" Width="*"/>
+                            <DataGridTextColumn Header="Phone" Binding="{Binding Phone}" Width="*"/>
+                            <DataGridTextColumn Header="Email" Binding="{Binding Email}" Width="*"/>
+                            <DataGridTextColumn Header="Rating" Binding="{Binding Rating}" Width="*"/>
+                            <DataGridTextColumn Header="Driver_type" Binding="{Binding Driver_type}" Width="*"/>
+                            <DataGridTemplateColumn Header="Photo">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <Image Source="{Binding PhotoSource}" Width="100" Height="100"/>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                            <DataGridTemplateColumn Header="Contract">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <Image Source="{Binding ContractScanSource}" Width="100" Height="100"/>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+
+
+                            <DataGridTextColumn Header="CarModel" Binding="{Binding CarModel}" Width="*"/>
+                            <DataGridTextColumn Header="CarNumber" Binding="{Binding CarNumber}" Width="*"/>
+                            
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Заказы">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="8*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+
+                    <!-- Кнопки управления -->
+                    <StackPanel Orientation="Horizontal" Margin="5,5,5,5" Grid.ColumnSpan="5">
+                        <Button Content="Обновить" Width="100" Margin="5" Click="Button_Click_Orders" />
+                        <Button Content="Создать" Width="100" Margin="5" Click="Button_Click_Creat_Orders"/>
+                    </StackPanel>
+
+                    <!-- Таблица с заказами -->
+                    <DataGrid Grid.Row="1" Name="OrdersGrid" AutoGenerateColumns="False" ItemsSource="{Binding Orders}" Margin="1,1,1,1" Grid.ColumnSpan="5"
+  IsReadOnly="True"
+  CanUserAddRows="False"
+  CanUserDeleteRows="False"
+  CanUserReorderColumns="False"
+  CanUserResizeColumns="True"
+  CanUserResizeRows="False"
+  CanUserSortColumns="False">
+                        <DataGrid.Columns>
+
+                            <DataGridTextColumn Header="Order_id" Binding="{Binding Order_id}" Width="*"/>
+                            <DataGridTextColumn Header="Dispatcher_id" Binding="{Binding Dispatcher_id}" Width="*"/>
+                            <DataGridTextColumn Header="Driver_id" Binding="{Binding Driver_id}" Width="*"/>
+                            <DataGridTextColumn Header="Client_phone" Binding="{Binding Client_phone}" Width="*"/>
+                            <DataGridTextColumn Header="Pickup_location" Binding="{Binding Pickup_location}" Width="*"/>
+                            <DataGridTextColumn Header="Dropoff_location" Binding="{Binding Dropoff_location}" Width="*"/>
+                            <DataGridTextColumn Header="Status" Binding="{Binding Status}" Width="*"/>
+                            <DataGridTextColumn Header="Fare" Binding="{Binding Fare}" Width="*"/>
+                            <DataGridTextColumn Header="Discount_applied" Binding="{Binding Discount_applied}" Width="*"/>
+                            <DataGridTextColumn Header="Created_at" Binding="{Binding Created_at}" Width="*"/>
+                            <DataGridTextColumn Header="Completed_at" Binding="{Binding Completed_at}" Width="*"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Смены">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="15*"/>
+                        <ColumnDefinition Width="12*"/>
+                        <ColumnDefinition Width="24*"/>
+                        <ColumnDefinition Width="346*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+
+                    <!-- Кнопки управления -->
+                    <StackPanel Orientation="Horizontal" Margin="5,5,5,5" Grid.ColumnSpan="4">
+                        <Button Content="Обновить" Width="100" Margin="5" Click="Button_Click_Shifts" />
+                    </StackPanel>
+
+
+
+                    <!-- Таблица с сменами -->
+                    <DataGrid Grid.Row="1" Name="ShiftsGrid" AutoGenerateColumns="False" ItemsSource="{Binding Shifts}" Margin="1,1,1,1" Grid.ColumnSpan="4"
+  IsReadOnly="True"
+  CanUserAddRows="False"
+  CanUserDeleteRows="False"
+  CanUserReorderColumns="False"
+  CanUserResizeColumns="True"
+  CanUserResizeRows="False"
+  CanUserSortColumns="False">
+                        <DataGrid.Columns>
+
+                            <DataGridTextColumn Header="Shift_id" Binding="{Binding Shift_id}" Width="*"/>
+                            <DataGridTextColumn Header="User_id" Binding="{Binding User_id}" Width="*"/>
+                            <DataGridTextColumn Header="FullName" Binding="{Binding FullName}" Width="*"/>
+                            <DataGridTextColumn Header="start_time" Binding="{Binding start_time}" Width="*"/>
+                            <DataGridTextColumn Header="End_time" Binding="{Binding End_time}" Width="*"/>
+                            <DataGridTemplateColumn Header="Photo">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <Image x:Name="PhotoPreview" Source="{Binding PhotoSource}" Width="100" Height="100"/>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                            <DataGridTemplateColumn Header="Добавить фото" Width="Auto">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <Button Content="Выбрать"  Click="SelectDispatcherButton_Click" Tag="{Binding}"/>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </Grid>
+            </TabItem>
+           
+        </TabControl>
     </Grid>
 </Window>

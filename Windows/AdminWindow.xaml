@@ -1,11 +1,19 @@
 ﻿<Window x:Class="Practis6_12.Windows.AdminWindow"
+        AllowDrop="True"
+        DragEnter="Window_DragEnter"
+        DragOver="Window_DragOver"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        Title="AdminWindow" Height="516" Width="878">
+        Title="AdminWindow" Height="748" Width="878">
     <Grid>
-        <TabControl HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="67*"/>
+            <ColumnDefinition Width="69*"/>
+            <ColumnDefinition Width="303*"/>
+        </Grid.ColumnDefinitions>
+        <TabControl Grid.ColumnSpan="3">
             <TabItem Header="Операторы">
                 <Grid>
                     <Grid.ColumnDefinitions>
@@ -43,19 +51,26 @@
                             <DataGridTextColumn Header="Email" Binding="{Binding Email}" Width="*"/>
                             <DataGridTextColumn Header="Status" Binding="{Binding Status}" Width="*"/>
                             <DataGridTextColumn Header="CreatedAt" Binding="{Binding CreatedAt}" Width="*"/>
-                            <DataGridTemplateColumn Header="Фото">
+                            <DataGridTemplateColumn Header="Photo">
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
                                         <Image Source="{Binding PhotoSource}" Width="100" Height="100"/>
                                     </DataTemplate>
                                 </DataGridTemplateColumn.CellTemplate>
                             </DataGridTemplateColumn>
-                            <DataGridTextColumn Header="Contract" Binding="{Binding EmploymentContractScan}" Width="*"/>
+                            <DataGridTemplateColumn Header="Contract">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <Image Source="{Binding ContractScanSource}" Width="100" Height="100"/>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                            <!-- <DataGridTextColumn Header="Contract" Binding="{Binding ContractScanSource}" Width="*"/> -->
                             <!-- Колонка с кнопкой -->
                             <DataGridTemplateColumn Header="Раскрыть" Width="Auto">
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
-                                        <Button Content="Выбрать" Click="SelectButton_Click" Tag="{Binding}"/>
+                                        <Button Content="Выбрать" Click="SelectDispatcherButton_Click" Tag="{Binding}"/>
                                     </DataTemplate>
                                 </DataGridTemplateColumn.CellTemplate>
                             </DataGridTemplateColumn>
@@ -66,10 +81,11 @@
             <TabItem Header="Водители">
                 <Grid>
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="15*"/>
-                        <ColumnDefinition Width="12*"/>
-                        <ColumnDefinition Width="24*"/>
-                        <ColumnDefinition Width="346*"/>
+                        <ColumnDefinition Width="33*"/>
+                        <ColumnDefinition Width="26*"/>
+                        <ColumnDefinition Width="53*"/>
+                        <ColumnDefinition Width="632*"/>
+                        <ColumnDefinition Width="128*"/>
                     </Grid.ColumnDefinitions>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"/>
@@ -77,12 +93,19 @@
                     </Grid.RowDefinitions>
 
                     <!-- Кнопки управления -->
-                    <StackPanel Orientation="Horizontal" Margin="5,5,5,5" Grid.ColumnSpan="4">
+                    <StackPanel Orientation="Horizontal" Margin="5,5,5,5" Grid.ColumnSpan="5">
                         <Button Content="Обновить" Width="100" Margin="5" Click="Button_Click_Drivers" />
                     </StackPanel>
 
                     <!-- Таблица с водителями -->
-                    <DataGrid Grid.Row="1" Name="DriversGrid" AutoGenerateColumns="False" ItemsSource="{Binding Drivers}" Margin="1,1,1,1" Grid.ColumnSpan="4">
+                    <DataGrid Grid.Row="1" Name="DriversGrid" AutoGenerateColumns="False" ItemsSource="{Binding Drivers}"  Margin="1,1,1,1" Grid.ColumnSpan="5"
+          IsReadOnly="True"
+          CanUserAddRows="False"
+          CanUserDeleteRows="False"
+          CanUserReorderColumns="False"
+          CanUserResizeColumns="True"
+          CanUserResizeRows="False"
+          CanUserSortColumns="False">
                         <DataGrid.Columns>
 
                             <DataGridTextColumn Header="Driver_Id" Binding="{Binding UserId}" Width="*"/>
@@ -91,10 +114,31 @@
                             <DataGridTextColumn Header="Email" Binding="{Binding Email}" Width="*"/>
                             <DataGridTextColumn Header="Rating" Binding="{Binding Rating}" Width="*"/>
                             <DataGridTextColumn Header="Driver_type" Binding="{Binding Driver_type}" Width="*"/>
-                            <DataGridTextColumn Header="Photo" Binding="{Binding Photo}" Width="*"/>
-                            <DataGridTextColumn Header="Contract" Binding="{Binding EmploymentContractScan}" Width="*"/>
+                            <DataGridTemplateColumn Header="Photo">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <Image Source="{Binding PhotoSource}" Width="100" Height="100"/>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                            <DataGridTemplateColumn Header="Contract">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <Image Source="{Binding ContractScanSource}" Width="100" Height="100"/>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+
+
                             <DataGridTextColumn Header="CarModel" Binding="{Binding CarModel}" Width="*"/>
                             <DataGridTextColumn Header="CarNumber" Binding="{Binding CarNumber}" Width="*"/>
+                            <DataGridTemplateColumn Header="Раскрыть" Width="Auto">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <Button Content="Выбрать" Click="SelectDriverButton_Click" Tag="{Binding}"/>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
                         </DataGrid.Columns>
                     </DataGrid>
                 </Grid>
@@ -102,10 +146,11 @@
             <TabItem Header="Заказы">
                 <Grid>
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="15*"/>
-                        <ColumnDefinition Width="12*"/>
-                        <ColumnDefinition Width="24*"/>
-                        <ColumnDefinition Width="346*"/>
+                        <ColumnDefinition Width="8*"/>
+                        <ColumnDefinition Width="25*"/>
+                        <ColumnDefinition Width="26*"/>
+                        <ColumnDefinition Width="53*"/>
+                        <ColumnDefinition Width="760*"/>
                     </Grid.ColumnDefinitions>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"/>
@@ -113,12 +158,19 @@
                     </Grid.RowDefinitions>
 
                     <!-- Кнопки управления -->
-                    <StackPanel Orientation="Horizontal" Margin="5,5,5,5" Grid.ColumnSpan="4">
+                    <StackPanel Orientation="Horizontal" Margin="5,5,5,5" Grid.ColumnSpan="5">
                         <Button Content="Обновить" Width="100" Margin="5" Click="Button_Click_Orders" />
                     </StackPanel>
 
                     <!-- Таблица с заказами -->
-                    <DataGrid Grid.Row="1" Name="OrdersGrid" AutoGenerateColumns="False" ItemsSource="{Binding Orders}" Margin="1,1,1,1" Grid.ColumnSpan="4">
+                    <DataGrid Grid.Row="1" Name="OrdersGrid" AutoGenerateColumns="False" ItemsSource="{Binding Orders}" Margin="1,1,1,1" Grid.ColumnSpan="5"
+          IsReadOnly="True"
+          CanUserAddRows="False"
+          CanUserDeleteRows="False"
+          CanUserReorderColumns="False"
+          CanUserResizeColumns="True"
+          CanUserResizeRows="False"
+          CanUserSortColumns="False">
                         <DataGrid.Columns>
 
                             <DataGridTextColumn Header="Order_id" Binding="{Binding Order_id}" Width="*"/>
@@ -154,15 +206,33 @@
                         <Button Content="Обновить" Width="100" Margin="5" Click="Button_Click_Shifts" />
                     </StackPanel>
 
+                    <StackPanel Orientation="Horizontal" Margin="125,5,5,5" Grid.ColumnSpan="4">
+                        <Button Content="Создать" Width="100" Margin="5" Click="Button_Click_Creat" />
+                    </StackPanel>
+
                     <!-- Таблица с сменами -->
-                    <DataGrid Grid.Row="1" Name="ShiftsGrid" AutoGenerateColumns="False" ItemsSource="{Binding Shifts}" Margin="1,1,1,1" Grid.ColumnSpan="4">
+                    <DataGrid Grid.Row="1" Name="ShiftsGrid" AutoGenerateColumns="False" ItemsSource="{Binding Shifts}" Margin="1,1,1,1" Grid.ColumnSpan="4"
+          IsReadOnly="True"
+          CanUserAddRows="False"
+          CanUserDeleteRows="False"
+          CanUserReorderColumns="False"
+          CanUserResizeColumns="True"
+          CanUserResizeRows="False"
+          CanUserSortColumns="False">
                         <DataGrid.Columns>
 
                             <DataGridTextColumn Header="Shift_id" Binding="{Binding Shift_id}" Width="*"/>
                             <DataGridTextColumn Header="User_id" Binding="{Binding User_id}" Width="*"/>
+                            <DataGridTextColumn Header="FullName" Binding="{Binding FullName}" Width="*"/>
                             <DataGridTextColumn Header="start_time" Binding="{Binding start_time}" Width="*"/>
                             <DataGridTextColumn Header="End_time" Binding="{Binding End_time}" Width="*"/>
-                            <DataGridTextColumn Header="Photo" Binding="{Binding Photo}" Width="*"/>
+                            <DataGridTemplateColumn Header="Photo">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <Image Source="{Binding PhotoSource}" Width="100" Height="100"/>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
 
                         </DataGrid.Columns>
                     </DataGrid>
@@ -170,18 +240,110 @@
             </TabItem>
             <TabItem Header="Отчёты">
                 <Grid>
-                    <TextBox x:Name="report_type_text_box" HorizontalAlignment="Left" Margin="10,36,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
+                    <TextBox x:Name="report_type_text_box" HorizontalAlignment="Left" Margin="10,36,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
                     <Label Content="" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
                     <Label Content="Тип отчёта" HorizontalAlignment="Left" Margin="10,5,0,0" VerticalAlignment="Top"/>
                     <Label Content="Дата отчёта:" HorizontalAlignment="Left" Margin="10,59,0,0" VerticalAlignment="Top"/>
                     <Label x:Name="CorrectDate" Content="Label" HorizontalAlignment="Left" Margin="16,90,0,0" VerticalAlignment="Top" />
-                    <TextBox x:Name="content_text_box" Margin="135,18,10,10" TextWrapping="Wrap" Text="TextBox"/>
+                    <TextBox x:Name="content_text_box" Margin="135,18,10,10" TextWrapping="Wrap" Text=""/>
                     <Button x:Name="Discharge" Content="Загрузить" HorizontalAlignment="Left" Margin="25,0,0,10" Click="Discharge_Click" Height="20" VerticalAlignment="Bottom"/>
                 </Grid>
             </TabItem>
             <TabItem Header="Создание сотрудника">
-                <Grid>
-                    <Label Content="Создание сотрудника" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                <Grid Margin="10">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="2*" />
+                        <!-- Левая колонка -->
+                        <ColumnDefinition Width="3*" />
+                        <!-- Правая колонка -->
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <!-- Заголовки колонок -->
+                        <RowDefinition Height="*" />
+                        <!-- Основная область -->
+                        <RowDefinition Height="Auto" />
+                        <!-- Кнопка сохранения -->
+                    </Grid.RowDefinitions>
+
+                    <!-- Заголовки колонок -->
+                    <TextBlock Text="Фотографии" Grid.Column="0" Grid.Row="0" FontSize="16" FontWeight="Bold" HorizontalAlignment="Center" Margin="5"/>
+                    <TextBlock Text="Данные сотрудника" Grid.Column="1" Grid.Row="0" FontSize="16" FontWeight="Bold" HorizontalAlignment="Center" Margin="5"/>
+
+                    <!-- Основной контент -->
+                    <Grid Grid.ColumnSpan="2" Margin="0,31,10,0" Grid.RowSpan="2">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="2*" />
+                            <!-- Левая колонка -->
+                            <ColumnDefinition Width="3*" />
+                            <!-- Правая колонка -->
+                        </Grid.ColumnDefinitions>
+
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="*"/>
+                            <!-- Оставшееся пространство -->
+                        </Grid.RowDefinitions>
+
+                        <!-- Левая колонка (Фото и скан договора) -->
+                        <StackPanel Grid.Column="0" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="5">
+
+                            <Label Content="Фото" HorizontalAlignment="Center" FontWeight="Bold"/>
+                            <Border BorderThickness="1" BorderBrush="Gray" Width="150" Height="150" AllowDrop="True" Background="Transparent" DragEnter="Border_DragEnter"   Drop="Photo_Drop">
+                                <Image x:Name="PhotoPreview" Width="150" Height="150" Stretch="Uniform"/>
+                            </Border>
+                            <Button x:Name="UploadPhotoButton" Content="Загрузить фото" Margin="5" Click="UploadPhotoButton_Click"/>
+
+                            <Label Content="Скан договора" HorizontalAlignment="Center" FontWeight="Bold" Margin="10 20 10 5"/>
+                            <Border BorderThickness="1" BorderBrush="Gray" Width="150" Height="150" Background="Transparent" AllowDrop="True" DragEnter="Border_DragEnter"  Drop="Contract_Drop">
+                                <Image x:Name="ContractPreview" Width="150" Height="150" Stretch="Uniform"/>
+                            </Border>
+                            <Button x:Name="UploadContractButton" Content="Загрузить скан" Margin="5" Click="UploadContractButton_Click"/>
+
+                        </StackPanel>
+
+                        <!-- Правая колонка (Данные сотрудника) -->
+                        <StackPanel Grid.Column="1" VerticalAlignment="Top" Margin="10">
+                            <Label Content="ФИО:"/>
+                            <TextBox x:Name="FullNameTextBox"/>
+
+                            <Label Content="Логин:"/>
+                            <TextBox x:Name="LoginTextBox"/>
+
+                            <Label Content="Телефон:"/>
+                            <TextBox x:Name="PhoneTextBox"/>
+
+                            <Label Content="Email:"/>
+                            <TextBox x:Name="EmailTextBox"/>
+
+                            <Label Content="Пароль:"/>
+                            <PasswordBox x:Name="PasswordBox"/>
+
+                            <Label Content="Роль:"/>
+                            <ComboBox x:Name="RoleComboBox">
+                                <!-- <ComboBoxItem Content="Admin"/> -->
+                                <ComboBoxItem Content="Dispatcher"/>
+                                <ComboBoxItem Content="Driver"/>
+                            </ComboBox>
+
+                            <!-- <Label Content="Статус:"/>
+                            <ComboBox x:Name="StatusComboBox">
+                                <ComboBoxItem Content="Active"/>
+                                <ComboBoxItem Content="Inactive"/>
+                            </ComboBox> -->
+                        </StackPanel>
+                    </Grid>
+
+                    <!-- Кнопка создания сотрудника -->
+                    <Button x:Name="CreateEmployeeButton" Content="Создать сотрудника" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2"
+            HorizontalAlignment="Center" Width="200" Margin="10" Click="CreateEmployeeButton_Click"/>
                 </Grid>
             </TabItem>
         </TabControl>

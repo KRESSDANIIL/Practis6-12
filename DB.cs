@@ -1,19 +1,35 @@
 using MySql.Data.MySqlClient;
+using System.Diagnostics;
 
 public class DB
 {
     private MySqlConnection connection;
 
     // Конструктор класса DB
-    public DB(string server, string userId, string password, string database)
+    //public DB(string server, string userId, string password, string database)
+    //{
+    //    // Создание строки подключения
+    //    MySqlConnectionStringBuilder stringBuilder = new MySqlConnectionStringBuilder
+    //    {
+    //        Server = server,
+    //        UserID = userId,
+    //        Password = password,
+    //        Database = database,
+    //    };
+
+    //    // Инициализация подключения
+    //    connection = new MySqlConnection(stringBuilder.ToString());
+    //}
+
+    public DB()
     {
         // Создание строки подключения
         MySqlConnectionStringBuilder stringBuilder = new MySqlConnectionStringBuilder
         {
-            Server = server,
-            UserID = userId,
-            Password = password,
-            Database = database
+            Server = "localhost",
+            UserID = "root",
+            Password = "",
+            Database = "practics",
         };
 
         // Инициализация подключения
@@ -61,7 +77,7 @@ public class DB
         }
         catch (Exception ex)
         {
-            Console.WriteLine("Ошибка при выполнении запроса: " + ex.Message);
+            Debug.WriteLine("Ошибка при выполнении запроса: " + ex.Message);
         }
         finally
         {
@@ -91,7 +107,7 @@ public class DB
         }
         catch (Exception ex)
         {
-            Console.WriteLine("Ошибка при выполнении запроса: " + ex.Message);
+            Debug.WriteLine("Ошибка при выполнении запроса: " + ex.Message);
         }
 
         return reader;

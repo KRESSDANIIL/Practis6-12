@@ -5,8 +5,94 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Practis6_12.Windows"
         mc:Ignorable="d"
-        Title="DriverWindow" Height="450" Width="800">
+        Title="DriverWindow" Height="484" Width="965">
     <Grid>
-        
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="67*"/>
+            <ColumnDefinition Width="69*"/>
+            <ColumnDefinition Width="303*"/>
+        </Grid.ColumnDefinitions>
+        <TabControl Grid.ColumnSpan="3">
+            <TabItem Header="Заказы">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="8*"/>
+                        <ColumnDefinition Width="25*"/>
+                        <ColumnDefinition Width="26*"/>
+                        <ColumnDefinition Width="53*"/>
+                        <ColumnDefinition Width="760*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+
+                    <!-- Кнопки управления -->
+                    <StackPanel Orientation="Horizontal" Margin="5,5,5,5" Grid.ColumnSpan="5">
+                        <Button Content="Обновить" Width="100" Margin="5" Click="Button_Click_Orders" />
+                    </StackPanel>
+
+                    <!-- Таблица с заказами -->
+                    <DataGrid Grid.Row="1" Name="OrdersGrid" AutoGenerateColumns="False" ItemsSource="{Binding Orders}" Margin="1,1,1,1" Grid.ColumnSpan="5"
+IsReadOnly="True"
+CanUserAddRows="False"
+CanUserDeleteRows="False"
+CanUserReorderColumns="False"
+CanUserResizeColumns="True"
+CanUserResizeRows="False"
+CanUserSortColumns="False">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Pickup_location" Binding="{Binding Pickup_location}" Width="*"/>
+                            <DataGridTextColumn Header="Dropoff_location" Binding="{Binding Dropoff_location}" Width="*"/>
+                            <DataGridTextColumn Header="Status" Binding="{Binding Status}" Width="*"/>
+                            <DataGridTextColumn Header="Fare" Binding="{Binding Fare}" Width="*"/>
+                            <DataGridTextColumn Header="Created_at" Binding="{Binding Created_at}" Width="*"/>
+                            <DataGridTemplateColumn Header="Принять" Width="Auto">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <Button Content="Выбрать" Click="SelectDriverOrderButton_Click" Tag="{Binding}"/>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Машина">
+                <Grid Margin="10" >
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="3*" />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+
+                    <Grid Grid.ColumnSpan="2" Margin="0,31,10,0" Grid.RowSpan="2">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="2*" />
+
+                        </Grid.ColumnDefinitions>
+
+                        <StackPanel Grid.Column="1" VerticalAlignment="Top" Margin="10">
+                            <Label Content="Модель:"/>
+                            <TextBox x:Name="ModelNameTextBox"/>
+
+                            <Label Content="Номер:"/>
+                            <TextBox x:Name="PlateNumberTextBox"/>
+
+                            <Label Content="Год:"/>
+                            <TextBox x:Name="YearTextBox"/>
+                        </StackPanel>
+                    </Grid>
+
+                    <StackPanel Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalAlignment="Center" Margin="10">
+                        <Button x:Name="Save" Content="Сохранить" Width="150" Margin="5" Click="SaveCar"/>
+                    </StackPanel>
+                </Grid>
+            </TabItem>
+            </TabControl>
     </Grid>
 </Window>

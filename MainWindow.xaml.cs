@@ -22,7 +22,7 @@ namespace Practis6_12
     /// </summary>
     public partial class MainWindow : Window
     {
-        DB ctx = new DB("localhost", "root", "", "practics");
+        DB ctx = new DB();
         public MainWindow()
         {
             InitializeComponent();
@@ -58,10 +58,10 @@ namespace Practis6_12
             string login = Login.Text;
             string password = Password.Password;
             string role;
-
+            int user_id;
             string password_hash = PasswordHasher.HashPassword(password);
 
-            string query = "SELECT role FROM users WHERE login = @Login  AND password_hash = @PasswordHash";
+            string query = "SELECT role,user_id FROM users WHERE login = @Login  AND password_hash = @PasswordHash";
 
             MySqlParameter[] parameters = {
             new MySqlParameter("@Login", login),
@@ -77,6 +77,7 @@ namespace Practis6_12
                         Debug.WriteLine("Success");
                         reader.Read();
                         role = reader.GetString("role");
+                        user_id = reader.GetInt16("user_id");
 
                         //while (reader.Read()) // reader.Read() возвращает true и переходит к следующему ряду.
                         //{
@@ -99,7 +100,7 @@ namespace Practis6_12
                                 }
                             case "Dispatcher":
                                 {
-                                    DispatcherWindow dispatcherWindow = new DispatcherWindow();
+                                    DispatcherWindow dispatcherWindow = new DispatcherWindow(user_id);
                                     dispatcherWindow.Show();
                                     Close();
                                     Debug.WriteLine("Dispatcher");
@@ -107,7 +108,7 @@ namespace Practis6_12
                                 }
                             case "Driver":
                                 {
-                                    DriverWindow driverWindow = new DriverWindow();
+                                    DriverWindow driverWindow = new DriverWindow(user_id);
                                     driverWindow.Show();
                                     Close();
                                     Debug.WriteLine("Driver");
