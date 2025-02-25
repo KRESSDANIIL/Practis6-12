@@ -25,6 +25,6 @@ namespace Practis6_12.Models
 
         public DateTime Created_at { get; set; }
 
-        public DateTime Completed_at { get; set; }
+        public DateTime? Completed_at { get; set; }
     }
 }

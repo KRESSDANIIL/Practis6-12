@@ -39,7 +39,7 @@ namespace Practis6_12.Windows
         {
             if (Client_Phone.Text != null && Client_Phone.Text != null && Pickup_Location.Text != null && Dropoff_Location.Text != null && Fare.Text !=null && Discount_Applied.Text != null) {
                 string query = "INSERT INTO orders (`dispatcher_id`, `client_phone`, `pickup_location`, `dropoff_location` , `fare`, `discount_applied` ) " +
-                            "VALUES (@Dispatcher_id, @Client_phone, @Pickup_location, @Dropoff_Location @Fare, @Discount_applied)";
+                            "VALUES (@Dispatcher_id, @Client_phone, @Pickup_location, @Dropoff_Location, @Fare, @Discount_applied)";
 
 
 
