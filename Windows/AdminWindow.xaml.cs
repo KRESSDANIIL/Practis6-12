@@ -203,7 +203,7 @@ namespace Practis6_12.Windows
                             Fare = reader.GetDecimal(7),
                             Discount_applied = reader.GetBoolean(8),
                             Created_at = reader.GetDateTime(9),
-                            Completed_at = reader.GetDateTime(10),
+                            Completed_at = reader.IsDBNull(2) ? (DateTime?)null : reader.GetDateTime(10),
 
                         };
                         Orders.Add(orders);
